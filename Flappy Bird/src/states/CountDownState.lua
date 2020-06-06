@@ -17,7 +17,7 @@ function CountDownState:update(dt)
 end
 function CountDownState:render()
     love.graphics.setFont(hugeFont)
-    love.graphics.printf(tostring(self.counter), 0, 120, VIRTUAL_WIDTH, 'center')
+    love.graphics.printf(tostring(self.counter), 0, VIRTUAL_HEIGHT/2-28, VIRTUAL_WIDTH, 'center')
 end
 function CountDownState:enter()
 

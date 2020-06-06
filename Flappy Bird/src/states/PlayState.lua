@@ -1,7 +1,7 @@
 PlayState=Class{}
 
 --constants
-PIPE_SPEED=60
+PIPE_SPEED=200
 PIPE_HEIGHT=288
 PIPE_WIDTH=70
 
@@ -29,11 +29,11 @@ function PlayState:update(dt)
         sound['music']:play()
         scrolling=true
         self.bird:update(dt)
-        self.spawntimer=math.random(150,400)/100
         self.timer=self.timer+dt
+        --adding new pipes
         if self.timer>self.spawntimer then
             self.timer=0
-            local y = math.max( 30, math.min(self.lastY + math.random(-20, 20), VIRTUAL_HEIGHT - 30))
+            local y = math.max(300, math.min(self.lastY + math.random(-50, 50), VIRTUAL_HEIGHT - 30))
             self.lastY = y
             table.insert(self.pipePair,PipePair(y))
         end
@@ -84,6 +84,9 @@ function PlayState:update(dt)
             end
         end
     end    
+
+    --changing spawing time of pipe
+    self.spawntimer=math.random(100,300)/100
 end
 function PlayState:enter()
     scrolling=true
@@ -97,7 +100,7 @@ function PlayState:render()
             pipes:render()
         end
         self.bird:render()
-        love.graphics.setFont(flappyFont)
+        love.graphics.setFont(mediumFont)
         love.graphics.print(tostring(self.score),10,10)
     else
         love.graphics.printf('PAUSE', 0, 120, VIRTUAL_WIDTH, 'center')

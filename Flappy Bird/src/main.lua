@@ -1,18 +1,19 @@
 WINDOW_HEIGHT=720
 WINDOW_WIDTH=1280
 
-VIRTUAL_WIDTH=512
-VIRTUAL_HEIGHT=288
+
+VIRTUAL_HEIGHT=720
+VIRTUAL_WIDTH=1280
 
 
 background=love.graphics.newImage('background.png')
 backgroundScroll=0
-BACKGROUND_SCROLL_SPEED=30
-BACKGROUND_LOOPING_POINT=412
+BACKGROUND_SCROLL_SPEED=60
+BACKGROUND_LOOPING_POINT=412*2
 
 ground=love.graphics.newImage('ground.png')
 groundScroll=0
-GROUND_SCROLL_SPEED=60
+GROUND_SCROLL_SPEED=120
 
 
 push=require 'push'
@@ -39,10 +40,10 @@ function love.load()
     math.randomseed(os.time())
 
     --loading different font in different size
-    smallFont = love.graphics.newFont('font.ttf', 8)
-    mediumFont = love.graphics.newFont('flappy.ttf', 14)
-    flappyFont = love.graphics.newFont('flappy.ttf', 28)
-    hugeFont = love.graphics.newFont('flappy.ttf', 56)
+    smallFont = love.graphics.newFont( 40)
+    mediumFont = love.graphics.newFont( 70)
+    flappyFont = love.graphics.newFont('flappy.ttf' ,140)
+    hugeFont = love.graphics.newFont('flappy.ttf' ,250)
     love.graphics.setFont(flappyFont)
 
     sound={
@@ -95,7 +96,7 @@ end
 function love.update(dt)
     if scrolling then
         backgroundScroll=(backgroundScroll+BACKGROUND_SCROLL_SPEED*dt)%BACKGROUND_LOOPING_POINT
-        groundScroll=(groundScroll+GROUND_SCROLL_SPEED*dt)%VIRTUAL_WIDTH
+        groundScroll=(groundScroll+GROUND_SCROLL_SPEED*dt)%100
     end
     gStateMachine:update(dt)
     love.keyboard.keysPressed={}
@@ -104,7 +105,7 @@ end
 
 function love.draw()
     push:start()
-    love.graphics.draw(background,-backgroundScroll,0)
+    love.graphics.draw(background,-backgroundScroll,0,0,2,VIRTUAL_HEIGHT/background:getHeight())
     
     gStateMachine:render()
     love.graphics.draw(ground,-groundScroll,VIRTUAL_HEIGHT-16)

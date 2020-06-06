@@ -15,20 +15,20 @@ function ScoreState:update(dt)
 end
 function ScoreState:render()
     -- simply render the score to the middle of the screen
-    if(self.score<=10) then
-        love.graphics.draw(self.bronze,VIRTUAL_WIDTH/2-self.gold:getWidth()/2,75)
-    elseif self.score<=25 then
-        love.graphics.draw(self.silver,VIRTUAL_WIDTH/2-self.gold:getWidth()/2,75)
+    if(self.score<=50) then
+        love.graphics.draw(self.bronze,VIRTUAL_WIDTH/5*4-self.gold:getWidth()/2,VIRTUAL_HEIGHT/3)
+    elseif self.score<=75 then
+        love.graphics.draw(self.silver,VIRTUAL_WIDTH/5*4-self.gold:getWidth()/2,VIRTUAL_HEIGHT/3)
     else
-        love.graphics.draw(self.gold,VIRTUAL_WIDTH/2-self.gold:getWidth()/2,75)
+        love.graphics.draw(self.gold,VIRTUAL_WIDTH/5*4-self.gold:getWidth()/2,VIRTUAL_HEIGHT/3)
     end
 
     love.graphics.setFont(flappyFont)
-    love.graphics.printf('Oops! You lost!', 0, 64, VIRTUAL_WIDTH, 'center')
+    love.graphics.printf('Oops! You lost!', 0, VIRTUAL_HEIGHT/10, VIRTUAL_WIDTH, 'center')
     love.graphics.setFont(mediumFont)
-    love.graphics.printf('Score: ' .. tostring(self.score), 0, 100, VIRTUAL_WIDTH, 'center')
+    love.graphics.printf('Score: ' .. tostring(self.score), 0, VIRTUAL_HEIGHT/10+150, VIRTUAL_WIDTH, 'center')
 
-    love.graphics.printf('Press X to Play Again!', 0, 160, VIRTUAL_WIDTH, 'center')
+    love.graphics.printf('Press X to Play Again!', 0, VIRTUAL_HEIGHT/10+300, VIRTUAL_WIDTH, 'center')
 
 end
 function ScoreState:exit()
